@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faQuoteLeft, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faQuoteLeft, faSpinner, faClipboard } from '@fortawesome/free-solid-svg-icons'
 import $ from 'jquery';
-library.add(fab, faQuoteLeft, faSpinner);
+library.add(fab, faQuoteLeft, faSpinner, faClipboard);
 
 
 function App() {
+  //INITIALIZE VARIABLES
+  const [copy,setcopy] = useState("");
   var i = -1;
+  const quoteRef = useRef(null);
   var backgroundList = [
     "linear-gradient(85deg, #17255A, #CE6550)",
     "linear-gradient(85deg, #2a9d8f, #e76f51)",
@@ -24,11 +27,13 @@ function App() {
     "linear-gradient(85deg, #007f5f, #dddf00)"
   ];
 
+  //RANDOM QUOTE API
   function randomQuote() {
     $.ajax({
         url: "https://api.forismatic.com/api/1.0/?",
         dataType: "jsonp",
         data: "method=getQuote&format=jsonp&lang=en&jsonp=?",
+        //BACKGROUND CYCLING
         beforeSend: function(){
           if(i === 10){
             i = -1;
@@ -42,14 +47,28 @@ function App() {
           document.getElementById('display').style.zIndex = "-1";
           document.getElementById('display').style.transition = "opacity 2s linear";
           document.getElementById('display').style.opacity = "0";
+          setcopy("");
         },
+        //SHOW QUOTE
         success: function (quoteData) {
             if (quoteData.quoteAuthor === '') {
                 quoteData.quoteAuthor = 'Unknown';
             };
             $("#API").html(" " + quoteData.quoteText);
             $("#API2").html(quoteData.quoteAuthor);
+            $("#twitterBtn").attr("href", 'https://twitter.com/intent/tweet?text=' + `"${quoteData.quoteText}"
+                                                                                      - ${quoteData.quoteAuthor}`);
+            //COPY QUOTE
+            $("#fb").click(function(){
+            $("#invis").val(`${quoteData.quoteText}
+                                                        - ${quoteData.quoteAuthor}`);
+              quoteRef.current.select();
+              document.execCommand('copy');
+              setcopy("Copied to Clipboard!");
+            });
         },
+
+        //BACKGROUND CYCLING
         complete: function(){
             i += 1;
           document.getElementById('display').style.backgroundImage = backgroundList[i];
@@ -58,6 +77,7 @@ function App() {
     });
 };
 
+//EXECUTE API ON LOAD
 useEffect(()=>{
   randomQuote();
 },[]);
@@ -71,19 +91,30 @@ useEffect(()=>{
     <h3><FontAwesomeIcon icon="quote-left" /><span id="API"></span></h3>
     </div>
 
-    <div className="authors">
+    <div id="a" className="authors">
     <h3>-<span id="API2"></span></h3>
     </div>
 
     <div className="brands">
+    <a id="twitterBtn" href='# ' target="_blank">
     <FontAwesomeIcon id="twt" icon={['fab', 'twitter']} />
-    <FontAwesomeIcon id="fb" icon={['fab', 'facebook']} />
+    </a>
+    <FontAwesomeIcon  id="fb" icon="clipboard"/><span id="copy">{copy}</span>
     </div>
 
     <div id="s"><button id="new" onClick={randomQuote}>New Quote!</button></div>
 
     </div>
     </div>
+
+    <form>
+        <textarea
+          id="invis"
+          ref={quoteRef}
+          value=""
+        />
+    </form>
+
     </div>
   );
 }
