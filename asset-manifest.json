@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-QuoteMachine/static/css/main.d26d7cba.chunk.css",
+    "main.js": "/react-QuoteMachine/static/js/main.e95a6ae0.chunk.js",
+    "main.js.map": "/react-QuoteMachine/static/js/main.e95a6ae0.chunk.js.map",
+    "runtime-main.js": "/react-QuoteMachine/static/js/runtime-main.953a5b9f.js",
+    "runtime-main.js.map": "/react-QuoteMachine/static/js/runtime-main.953a5b9f.js.map",
+    "static/js/2.cbcd5c49.chunk.js": "/react-QuoteMachine/static/js/2.cbcd5c49.chunk.js",
+    "static/js/2.cbcd5c49.chunk.js.map": "/react-QuoteMachine/static/js/2.cbcd5c49.chunk.js.map",
+    "index.html": "/react-QuoteMachine/index.html",
+    "precache-manifest.47b1a3cb197ee990bddea55122855831.js": "/react-QuoteMachine/precache-manifest.47b1a3cb197ee990bddea55122855831.js",
+    "service-worker.js": "/react-QuoteMachine/service-worker.js",
+    "static/css/main.d26d7cba.chunk.css.map": "/react-QuoteMachine/static/css/main.d26d7cba.chunk.css.map",
+    "static/js/2.cbcd5c49.chunk.js.LICENSE.txt": "/react-QuoteMachine/static/js/2.cbcd5c49.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.953a5b9f.js",
+    "static/js/2.cbcd5c49.chunk.js",
+    "static/css/main.d26d7cba.chunk.css",
+    "static/js/main.e95a6ae0.chunk.js"
+  ]
+}
