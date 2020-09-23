@@ -18,6 +18,8 @@ You can see more of the images on the **Images** folder
 
 This was finished before my Birthday!
 
+Website is here: https://darealtube.github.io/react-QuoteMachine/
+
 To run it on your local machine clone into the repo, then type: 
 
     npm install && npm start
